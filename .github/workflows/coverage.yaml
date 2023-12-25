@@ -1,0 +1,21 @@
+name: Adding test coverage to CodeCov
+
+on: [push, pull_request]
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependences
+        run: npm install
+
+      - name: Running test with coverage
+        run: npm run test:cov
