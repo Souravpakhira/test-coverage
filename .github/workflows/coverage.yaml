@@ -1,6 +1,6 @@
 name: Adding test coverage to CodeCov
 
-on: [push, pull_request]
+on: [push,pull_request]
 
 jobs:
   run-test:
@@ -19,3 +19,12 @@ jobs:
 
       - name: Running test with coverage
         run: npm run test:cov
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/cobertura-coverage.xml
+          name: node-coverage
+        # env:
+        #   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        
