@@ -22,8 +22,8 @@ jobs:
       - name: Install dependences
         run: npm install
 
-      - name: Print GitHub Workspace Path
-        run: echo "GitHub Workspace Path: $GITHUB_WORKSPACE"
+      # - name: Print GitHub Workspace Path
+      #   run: echo "GitHub Workspace Path: $GITHUB_WORKSPACE"
 
       - name: List Files in Repository
         run: ls -R $GITHUB_WORKSPACE
