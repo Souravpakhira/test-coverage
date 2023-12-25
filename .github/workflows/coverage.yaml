@@ -2,14 +2,9 @@ name: Adding test coverage to CodeCov
 
 on: [push,pull_request]
 
-env:
-  APP_WORKING_DIR: test-coverage
 jobs:
   run-test:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ${{ env.APP_WORKING_DIR }}
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
@@ -35,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: node-unit-coverage
-          path: ${{ env.APP_WORKING_DIR }}/coverage
+          path: ./coverage
       # - name: Upload coverage reports to Codecov
       #   uses: codecov/codecov-action@v3
       #   with:
