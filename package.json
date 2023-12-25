@@ -7,7 +7,7 @@
     "start": "node dist/index.js",
     "build": "tsc",
     "test": "jest",
-    "test:cov": "jest --coverage"
+    "test:cov": "jest --coverage --detectOpenHandles"
   },
   "keywords": [],
   "author": "",

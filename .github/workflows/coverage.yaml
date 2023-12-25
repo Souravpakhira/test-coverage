@@ -2,9 +2,14 @@ name: Adding test coverage to CodeCov
 
 on: [push,pull_request]
 
+env:
+  CRUX_WORKING_DIRECTORY: web/crux
 jobs:
   run-test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.CRUX_WORKING_DIRECTORY }}
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
@@ -21,7 +26,7 @@ jobs:
       #   run: echo "GitHub Workspace Path: $GITHUB_WORKSPACE"
 
       - name: List Files in Repository
-        run: ls -R $GITHUB_WORKSPACE
+        run: ls -R $GITHUB_WORKSPACE | grep -vE 'node_modules|dist'
 
       - name: Running test with coverage
         run: npm run test:cov
@@ -39,17 +44,17 @@ jobs:
         # env:
         #   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-  upload-coverage:
-    runs-on: ubuntu-latest
-    needs: run-test
-    steps:
-      - name: Download unit test coverage
-        uses: actions/download-artifact@v3
-        with:
-          name: node-unit-coverage
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./coverage/cobertura-coverage.xml
-          name: node-coverage
+  # upload-coverage:
+  #   runs-on: ubuntu-latest
+  #   needs: run-test
+  #   steps:
+  #     - name: download unit test coverage
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: node-unit-coverage
+  #
+  #     - name: upload coverage reports to codecov
+  #       uses: codecov/codecov-action@v3
+  #       with:
+  #         files: ./coverage/cobertura-coverage.xml
+  #         name: node-coverage
